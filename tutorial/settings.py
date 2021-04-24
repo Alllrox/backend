@@ -25,8 +25,14 @@ SECRET_KEY = 'nps7y^w93v@u3%kbdqs90au)^!2sq-0ys%lt*t#*-uao99*d=='
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+from pathlib import Path
+
+try:
+    import django_heroku
+except:
+    django_heroku = None
 
 # Application definition
 
@@ -130,3 +136,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
     'PAGE_SIZE': 10
 }
+
+
+if django_heroku:
+    django_heroku.settings(locals())
